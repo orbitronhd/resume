@@ -1,5 +1,6 @@
 import google.generativeai as genai
 import json
+from google.api_core.exceptions import ResourceExhausted
 from config import get_gemini_api_key, SYSTEM_PROMPT
 
 def initialize_gemini():
@@ -9,10 +10,15 @@ def initialize_gemini():
     genai.configure(api_key=api_key)
 
 def process_with_gemini(prompt: str, text: str) -> dict:
-    model = genai.GenerativeModel('gemini-2.5-pro')
+    model = genai.GenerativeModel('gemini-2.5-flash')
     full_prompt = f"{SYSTEM_PROMPT}\n\nTask: {prompt}\n\nResume Text:\n{text}\n\nReturn ONLY a valid JSON object."
     
-    response = model.generate_content(full_prompt)
+    try:
+        response = model.generate_content(full_prompt)
+    except ResourceExhausted:
+        return {"error": "⚠️ API quota exhausted. Please create a new API key at https://aistudio.google.com/apikey (select 'new project') and update .streamlit/secrets.toml"}
+    except Exception as e:
+        return {"error": f"API call failed: {str(e)}"}
     
     try:
         # Strip markdown formatting if present
