@@ -14,7 +14,19 @@ from utils.anonymizer import anonymize_text
 from core.ranking import evaluate_resume
 from core.fairness import evaluate_fairness
 
-app = FastAPI(title="ResumeAI API", version="1.0.0")
+from contextlib import asynccontextmanager
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    # Initialize Gemini on startup
+    try:
+        initialize_gemini()
+        print("✅ Gemini API initialized")
+    except Exception as e:
+        print(f"⚠️ Failed to initialize Gemini: {e}")
+    yield
+
+app = FastAPI(title="ResumeAI API", version="1.0.0", lifespan=lifespan)
 
 # CORS for frontend dev server
 app.add_middleware(
@@ -24,29 +36,6 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
-# Initialize Gemini on startup
-@app.on_event("startup")
-async def startup():
-    try:
-        # For FastAPI, read API key from environment or .streamlit/secrets.toml
-        api_key = os.environ.get("GEMINI_API_KEY")
-        if not api_key:
-            import tomllib
-            secrets_path = os.path.join(os.path.dirname(__file__), ".streamlit", "secrets.toml")
-            if os.path.exists(secrets_path):
-                with open(secrets_path, "rb") as f:
-                    secrets = tomllib.load(f)
-                    api_key = secrets.get("GEMINI_API_KEY", "")
-        
-        if api_key:
-            import google.generativeai as genai
-            genai.configure(api_key=api_key)
-            print("✅ Gemini API initialized")
-        else:
-            print("⚠️ No GEMINI_API_KEY found")
-    except Exception as e:
-        print(f"⚠️ Failed to initialize Gemini: {e}")
 
 
 @app.get("/api/health")
