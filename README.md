@@ -12,9 +12,9 @@ The project is split into two halves:
 
 ## Prerequisites
 
-- [Python 3.10+](https://www.python.org/downloads/)
+- [Python 3.12](https://www.python.org/downloads/)
 - [Node.js & npm](https://nodejs.org/en)
-- A [Google Gemini API Key](https://aistudio.google.com/apikey)
+- [A Google Gemini API Key](https://aistudio.google.com/apikey)
 
 ## Setup & Installation
 
