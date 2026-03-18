@@ -1,0 +1,209 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{geometry}
+\usepackage{caption}
+\usepackage{float}
+\usepackage{titlesec}
+\usepackage{setspace}
+
+\geometry{a4paper, margin=1in}
+\onehalfspacing
+
+\begin{document}
+
+\begin{titlepage}
+    \centering
+    \vspace*{1cm}
+    
+    % To add the college logo, upload your logo image (e.g., rset_logo.png) to Overleaf 
+    % and uncomment the following line:
+    % \includegraphics[width=0.4\textwidth]{rset_logo.png}
+    \vspace{2cm}
+    
+    {\Huge \textbf{Project Report} \par}
+    \vspace{0.8cm}
+    {\Huge \textbf{AI Concepts} \par}
+    
+    \vspace{1.5cm}
+    \noindent\rule{\textwidth}{0.4pt}
+    \vspace{1cm}
+    
+    {\Large AI-Powered Resume Analyzer and \\[0.5em] Skill Gap Assessment System \par}
+    
+    \vspace{1cm}
+    \noindent\rule{\textwidth}{0.4pt}
+    \vspace{2cm}
+    
+    Submitted By : \par
+    \vspace{0.8cm}
+    Group 7 \\
+    31 ABEL PHILIP THOMAS \\
+    32 JONATHAN JIMSON CHAKRAMAKAL \\
+    33 GRACE MARIYA C J \\
+    34 DIVYA JAYADEVAN \\
+    35 ANDREA MARIA JOSE \par
+    
+    \vfill
+\end{titlepage}
+\begin{abstract}
+This report details the development of an AI-powered resume screening system designed to bridge the gap between candidate experience and recruiter efficiency. Through the integration of Large Language Models (LLMs) and advanced Natural Language Processing (NLP) techniques, the system evaluates resumes against job descriptions while emphasizing fairness and providing actionable, personalized recommendations for applicants.
+\end{abstract}
+\newpage
+
+\tableofcontents
+\newpage
+
+\section{Introduction}
+The recruitment process has traditionally relied on manual resume screening or keyword-based Applicant Tracking Systems (ATS). While efficient for handling large volumes of applications, these systems often fail to capture the nuances of candidate experience and are prone to inheriting human biases. This project proposes an AI-driven approach to resume screening, utilizing Gemini 2.5 Flash and NLP libraries to provide objective, context-aware resume evaluation, fairness auditing, and personalized feedback for applicants.
+
+\section{Background and Motivation}
+
+\subsection{Traditional ATS Limitations}
+Conventional Applicant Tracking Systems primarily rely on exact keyword matching. This rigid approach often filters out highly qualified candidates who may use different terminology to describe their skills and experiences, leading to a high false-negative rate in the screening process.
+
+\subsection{The Candidate Experience Gap}
+A significant pain point in modern recruitment is the "black hole" phenomenon, where candidates submit resumes and receive no actionable feedback. Applicants lack insights into why their resumes are rejected, preventing them from improving their profiles for future opportunities.
+
+\subsection{Advances in NLP Enabling Smarter Analysis}
+Recent breakthroughs in Natural Language Processing (NLP) and Large Language Models (LLMs) have enabled machines to understand semantic contexts. This shift allows for evaluating the actual competence behind the text, rather than relying on superficial keyword overlap, thus paving the way for unbiased and intelligent screening.
+
+\section{Literature Review}
+
+\subsection{Rule-Based and Statistical Resume Parsing}
+Early resume parsers utilized rule-based architectures and statistical models (like Hidden Markov Models and Conditional Random Fields) to extract structural entities. While effective for well-formatted documents, their lack of semantic understanding makes them brittle when faced with diverse resume layouts.
+
+\subsection{NER-Based Skill Extraction}
+Named Entity Recognition (NER) models, heavily reliant on standard NLP libraries like spaCy, improved the extraction of skills, organizations, and PII (Personally Identifiable Information). Redacting PII is crucial for anonymization and mitigating unconscious bias during the initial evaluation.
+
+\subsection{Transformer-Based Semantic Matching}
+Transformers (e.g., BERT, RoBERTa) introduced the ability to create dense vector representations of text, allowing for semantic matching between resumes and job descriptions. This improved matches beyond literal keywords but often fell short in complex reasoning.
+
+\subsection{LLMs for HR Tasks and Recommendation}
+Modern LLMs excel in contextual reasoning, summarization, and generating actionable suggestions. They not only match candidates with roles but can also explain the rationale behind the matching and provide clear roadmaps for skill improvement.
+
+\section{Proposed Problem and Method}
+
+\subsection{Problem Statement}
+To design and implement an AI-powered resume screening application that can accurately parse resumes, evaluate them against a specified job description, mitigate demographic bias through anonymization, and provide constructive, personalized feedback to candidates.
+
+\subsection{System Architecture}
+The system adopts a modern client-server architecture:
+\begin{itemize}
+    \item \textbf{Frontend:} Built with React, TypeScript, and TailwindCSS for a responsive user interface.
+    \item \textbf{Backend:} Powered by FastAPI, handling the asynchronous processing of uploads.
+    \item \textbf{AI Layer:} Gemini 2.5 Flash for intelligent ranking, coupled with spaCy for PII extraction and anonymization.
+\end{itemize}
+
+\subsection{Methodology Pipeline}
+\begin{enumerate}
+    \item \textbf{Ingestion:} Uploading PDF/DOCX resumes and parsing raw text.
+    \item \textbf{Anonymization:} Removing names, contacts, and demographic markers using NLP.
+    \item \textbf{Evaluation:} Scoring the anonymized text against the job description using LLM prompts.
+    \item \textbf{Fairness Audit:} Scanning the original text to calculate a bias risk score.
+    \item \textbf{Feedback Engine:} Generating strengths, weaknesses, and actionable recommendations.
+\end{enumerate}
+
+\subsection{Prompt Engineering}
+Careful prompt engineering ensures that the LLM focuses purely on merits, skills, and qualifications. Instructions strictly forbid the assumption of demographics and enforce the generation of highly personalized candidate recommendations.
+
+\subsection{User Workflow}
+The user uploads a resume and pastes a job description. The system processes the document and displays a dashboard detailing the match score, extracted strengths, skill gaps, fairness analysis, and a set of recommendations. 
+
+\section{Results}
+\textit{Note: Replace the placeholder image paths with the actual screenshots of the application.}
+
+\subsection{Landing Page}
+The landing page introduces the system's core features to the user, providing a clear call-to-action to start the evaluation process.
+\begin{figure}[H]
+    \centering
+    % \includegraphics[width=0.8\textwidth]{images/landing_page.png}
+    \fbox{\rule{0pt}{2in} \rule{0.8\textwidth}{0pt}}
+    \caption{Landing Page interface}
+    \label{fig:landing}
+\end{figure}
+
+\subsection{Resume Upload and Job Description Input}
+Users upload their documents and specify the job requirements in this view.
+\begin{figure}[H]
+    \centering
+    % \includegraphics[width=0.8\textwidth]{images/upload_input.png}
+    \fbox{\rule{0pt}{2in} \rule{0.8\textwidth}{0pt}}
+    \caption{File upload and Job Description input form}
+    \label{fig:upload}
+\end{figure}
+
+\subsection{File Upload Confirmation and Preset Selection}
+Once uploaded, the system confirms the file format and read-status, allowing users to select evaluation presets if applicable.
+\begin{figure}[H]
+    \centering
+    % \includegraphics[width=0.8\textwidth]{images/confirmation.png}
+    \fbox{\rule{0pt}{2in} \rule{0.8\textwidth}{0pt}}
+    \caption{Upload confirmation state}
+    \label{fig:confirm}
+\end{figure}
+
+\subsection{Skills Match Dashboard}
+Displays the overall compatibility score based on the semantic alignment of candidate skills and job requirements.
+\begin{figure}[H]
+    \centering
+    % \includegraphics[width=0.8\textwidth]{images/skills_match.png}
+    \fbox{\rule{0pt}{2in} \rule{0.8\textwidth}{0pt}}
+    \caption{Skills Match Dashboard with score gauge}
+    \label{fig:match}
+\end{figure}
+
+\subsection{Skill Gaps Panel}
+Highlights the weaknesses and missing skills identified during the LLM evaluation.
+\begin{figure}[H]
+    \centering
+    % \includegraphics[width=0.8\textwidth]{images/skill_gaps.png}
+    \fbox{\rule{0pt}{2in} \rule{0.8\textwidth}{0pt}}
+    \caption{Skill Gaps and Weaknesses Panel}
+    \label{fig:gaps}
+\end{figure}
+
+\subsection{Learning Roadmap and Weekly Study Plan}
+Provides the generated actionable recommendations and structural study improvements to help the candidate upskill effectively.
+\begin{figure}[H]
+    \centering
+    % \includegraphics[width=0.8\textwidth]{images/roadmap.png}
+    \fbox{\rule{0pt}{2in} \rule{0.8\textwidth}{0pt}}
+    \caption{Recommendations and Roadmap}
+\end{figure}
+\textit{Note: Replace the boxes with your actual screenshots on Overleaf.}
+
+\subsection{Landing and Upload Pages}
+The application provides a seamless drag-and-drop zone and job description text area.
+\begin{center}
+    % \includegraphics[width=0.8\linewidth]{landing_page.png}
+    \fbox{\rule{0pt}{0.6in} \rule{0.8\linewidth}{0pt}}
+    \captionof{figure}{Landing & Upload UI}
+\end{center}
+
+\subsection{Match Dashboard and Gaps}
+Displays the overall compatibility score based on semantic alignment, alongside weaknesses and missing soft/hard skills.
+\begin{center}
+    % \includegraphics[width=0.8\linewidth]{skills_match.png}
+    \fbox{\rule{0pt}{0.6in} \rule{0.8\linewidth}{0pt}}
+    \captionof{figure}{Match Dashboard & Gaps Panel}
+\end{center}
+
+\subsection{Actionable Recommendations}
+Provides the structural study improvements to help the candidate upskill efficiently.
+\begin{center}
+    % \includegraphics[width=0.8\linewidth]{roadmap.png}
+    \fbox{\rule{0pt}{0.6in} \rule{0.8\linewidth}{0pt}}
+    \captionof{figure}{Personalized recommendations}
+\end{center}
+
+\section{Inference and Conclusion}
+
+\subsection{Filtering to Facilitating}
+The system transitions HR tech from acting as a gatekeeper to facilitating candidate growth. By providing constructive feedback, the system acts as an "AI Career Coach," significantly improving candidate experience. Careful prompt engineering ensures the LLM's response strictly adheres to the provided resume context without hallucinating non-existent applicant traits.
+
+\subsection{Conclusion}
+This project securely demonstrates an effective, fair, and uniquely candidate-centric screening tool. Using advanced Generative LLMs and NER anonymization pipelines, we have developed a system that actively assists applicants in tracking missing professional skills while maintaining recruiter efficiency.
+
+\end{document}

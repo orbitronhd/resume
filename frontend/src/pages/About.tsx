@@ -92,25 +92,6 @@ export default function About() {
             ))}
           </div>
         </motion.div>
-        {/* Team Members */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="space-y-6"
-        >
-          <h2 className="text-2xl font-extrabold">Developed By</h2>
-          <div className="glass-card p-5">
-            <h3 className="text-lg font-bold mb-4 text-primary">Group 7</h3>
-            <ul className="space-y-2 text-muted-foreground list-none pl-2">
-              <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-primary shrink-0" /> 31 ABEL PHILIP THOMAS</li>
-              <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-primary shrink-0" /> 32 JONATHAN JIMSON CHAKRAMAKAL</li>
-              <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-primary shrink-0" /> 33 GRACE MARIYA C J</li>
-              <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-primary shrink-0" /> 34 DIVYA JAYADEVAN</li>
-              <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-primary shrink-0" /> 35 ANDREA MARIA JOSE</li>
-            </ul>
-          </div>
-        </motion.div>
       </div>
     </div>
   );

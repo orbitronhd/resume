@@ -17,6 +17,8 @@ def process_with_gemini(prompt: str, text: str) -> dict:
     if _gemini_client is None:
         initialize_gemini()
         
+    assert _gemini_client is not None
+        
     full_prompt = f"{SYSTEM_PROMPT}\n\nTask: {prompt}\n\nResume Text:\n{text}\n\nReturn ONLY a valid JSON object."
     
     try:
@@ -26,7 +28,7 @@ def process_with_gemini(prompt: str, text: str) -> dict:
         )
     except APIError as e:
         if e.code == 429: # ResourceExhausted
-            return {"error": "⚠️ API quota exhausted. Please create a new API key at https://aistudio.google.com/apikey (select 'new project') and update .streamlit/secrets.toml"}
+            return {"error": "⚠️ API quota exhausted. Please create a new API key at https://aistudio.google.com/apikey (select 'new project') and update your .env file."}
         return {"error": f"API call failed: {str(e)}"}
     except Exception as e:
         return {"error": f"API call failed: {str(e)}"}

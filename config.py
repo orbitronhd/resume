@@ -1,24 +1,16 @@
 import os
-import streamlit as st
+from dotenv import load_dotenv
+
+# Try to load from .env file if present
+load_dotenv()
 
 def get_gemini_api_key():
-    import tomllib
-    
-    # Try environment variable first
+    # Will try environment variable or .env file
     api_key = os.environ.get("GEMINI_API_KEY")
     if api_key:
         return api_key
-        
-    # Fallback to secrets.toml
-    secrets_path = os.path.join(os.path.dirname(__file__), ".streamlit", "secrets.toml")
-    if os.path.exists(secrets_path):
-        try:
-            with open(secrets_path, "rb") as f:
-                secrets = tomllib.load(f)
-                return secrets.get("GEMINI_API_KEY")
-        except Exception as e:
-            print(f"Error reading secrets.toml: {e}")
-            
+    
+    print("Warning: GEMINI_API_KEY not found in environment or .env file.")
     return None
 
 SYSTEM_PROMPT = """You are an objective, fairness-aware AI Resume Screening Agent. 
