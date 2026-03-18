@@ -48,21 +48,6 @@ export default function RankingResults({ ranking }: { ranking: RankingResult }) 
           <Info className="w-5 h-5 text-primary shrink-0 mt-0.5" />
           <p className="text-sm text-muted-foreground leading-relaxed">{ranking.summary}</p>
         </div>
-
-        {ranking.recommendations && ranking.recommendations.length > 0 && (
-          <div>
-            <h4 className="text-sm font-semibold text-primary flex items-center gap-2 mb-2">
-              <span className="w-4 h-4 flex items-center justify-center text-lg">💡</span> Recommendations
-            </h4>
-            <ul className="space-y-1.5">
-              {ranking.recommendations.map((r, i) => (
-                <li key={i} className="text-sm text-muted-foreground flex items-start gap-2">
-                  <span className="text-primary mt-0.5">→</span> {r}
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
       </div>
     </motion.div>
   );

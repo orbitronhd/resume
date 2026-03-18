@@ -3,7 +3,6 @@ export interface RankingResult {
   strengths: string[];
   weaknesses: string[];
   summary: string;
-  recommendations: string[];
 }
 
 export interface FairnessResult {
