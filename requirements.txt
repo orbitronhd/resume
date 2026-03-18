@@ -90,3 +90,5 @@ watchdog==6.0.0
 weasel==0.4.3
 wrapt==2.1.2
 python-multipart==0.0.9
+
+python-dotenv==1.0.1

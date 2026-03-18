@@ -51,18 +51,6 @@ export default function ReportExport({ result, fileName }: ReportExportProps) {
     doc.text(summaryLines, lm, y);
     y += summaryLines.length * 5 + 10;
 
-    // Ranking Recommendations
-    if (result.ranking.recommendations && result.ranking.recommendations.length > 0) {
-      doc.text("Recommendations:", lm, y);
-      y += 6;
-      result.ranking.recommendations.forEach((r) => {
-        const textLines = doc.splitTextToSize(`  • ${r}`, 170);
-        doc.text(textLines, lm, y);
-        y += textLines.length * 5;
-      });
-      y += 4;
-    }
-
     // Fairness
     doc.setFontSize(14);
     doc.text(`Bias Risk Score: ${result.fairness.bias_risk_score}/100`, lm, y);
